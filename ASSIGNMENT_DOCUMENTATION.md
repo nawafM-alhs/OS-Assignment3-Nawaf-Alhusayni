@@ -145,7 +145,7 @@ The second race condition is related to the shared `executionLog` ArrayList. The
 **Q**: Explain the difference between ReentrantLock and Semaphore. Where did you use each in your code and why?
 
 **Your Answer**:
-`ReentrantLock` is used to provide mutual exclusion for a critical section. It allows only one thread at a time to enter a protected block of code, and it is useful when protecting shared variables from race conditions. In my code, I used `ReentrantLock` to protect the shared counters and the shared execution log.
+`ReentrantLock` is used to provide mutual exclusion for a critical section. It allows only one thread at a time to enter a protected block of code, and it is useful when protecting shared variables from race conditions. In my code, I used `ReentrantLock` to protect the shared counters and the shared execution logg.
 
 A `Semaphore` controls access to a limited number of permits. It can allow one or more threads to access a resource depending on the number of available permits. In my code, I used a binary semaphore with one permit to control CPU access. This means only one process thread can execute its CPU quantum at a time, which matches the idea of one CPU being assigned to one process at a time in this simulation.
 
