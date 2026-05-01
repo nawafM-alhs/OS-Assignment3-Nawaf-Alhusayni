@@ -335,30 +335,30 @@ Synchronization is like allowing only one person at a time to write on a shared 
 ## Part 6: GitHub Repository Information
 
 **Repository URL**: 
-
+https://github.com/[nawafM-alhs]/OS-Assignment3-[Nawaf]-[Alhusayni]
 **Number of commits**: 
-
+6
 **Commit messages**: 
-1. 
-2. 
-3. 
+1. Set my student ID
+2. Add synchronization imports
+3. Protect shared counters with ReentrantLock
 4. 
-
+Protect execution log with ReentrantLock
 ---
 
 ## Summary
 
 **Total time spent on assignment**: 
-
+4.5 hours
 **Key takeaways**: 
-1. 
-2. 
-3. 
+1. Shared resources must be protected when accessed by multiple threads.
+2. ReentrantLock is useful for mutual exclusion in critical sections.
+3. A binary semaphore can control exclusive access to a simulated CPU.
 
 **Most challenging aspect**: 
-
+The most challenging aspect was identifying all shared resources and deciding which synchronization mechanism should protect each one.
 **What I'm most proud of**: 
-
+I am most proud of connecting the theory of process synchronization with a working Java scheduler simulation and verifying the results through repeated testing.
 ---
 
 **End of Documentation**
