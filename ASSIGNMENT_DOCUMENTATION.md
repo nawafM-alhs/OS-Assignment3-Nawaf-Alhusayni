@@ -213,8 +213,35 @@ public static final ReentrantLock counterLock = new ReentrantLock();
 
 **Code snippet**:
 ```java
-// Paste your implementation here
-```
+// Lock used to protect shared counter variables
+public static final ReentrantLock counterLock = new ReentrantLock();
+
+public static void incrementContextSwitch() {
+    counterLock.lock();
+    try {
+        contextSwitchCount++;
+    } finally {
+        counterLock.unlock();
+    }
+}
+
+public static void incrementCompletedProcess() {
+    counterLock.lock();
+    try {
+        completedProcessCount++;
+    } finally {
+        counterLock.unlock();
+    }
+}
+
+public static void addWaitingTime(long time) {
+    counterLock.lock();
+    try {
+        totalWaitingTime += time;
+    } finally {
+        counterLock.unlock();
+    }
+}
 
 **Justification**: 
 
