@@ -63,7 +63,7 @@ class SharedResources {
         // TODO: Protect this critical section with a lock
         Lock.lock();
         try {
-            contextSwitchCount++;
+            completedProcessCount++;
         } finally {
             Lock.unlock();
         }
@@ -90,6 +90,46 @@ class SharedResources {
         } finally {
             Lock.unlock();
         }
+    }
+
+    public static int getContextSwitchCount() {
+        return contextSwitchCount;
+    }
+
+    public static void setContextSwitchCount(int contextSwitchCount) {
+        SharedResources.contextSwitchCount = contextSwitchCount;
+    }
+
+    public static int getCompletedProcessCount() {
+        return completedProcessCount;
+    }
+
+    public static void setCompletedProcessCount(int completedProcessCount) {
+        SharedResources.completedProcessCount = completedProcessCount;
+    }
+
+    public static long getTotalWaitingTime() {
+        return totalWaitingTime;
+    }
+
+    public static void setTotalWaitingTime(long totalWaitingTime) {
+        SharedResources.totalWaitingTime = totalWaitingTime;
+    }
+
+    public static List<String> getExecutionLog() {
+        return executionLog;
+    }
+
+    public static void setExecutionLog(List<String> executionLog) {
+        SharedResources.executionLog = executionLog;
+    }
+
+    public static ReentrantLock getLock() {
+        return Lock;
+    }
+
+    public static Semaphore getCpusemaphore() {
+        return cpuSemaphore;
     }
 }
 
