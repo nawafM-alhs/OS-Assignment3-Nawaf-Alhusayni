@@ -311,7 +311,7 @@ I learned that synchronization must protect shared data even when the program ap
 ## Part 5: Reflection and Learning
 
 ### What I learned about synchronization:
-
+I learned that synchronization is essential when multiple threads share the same data. Even simple operations like counter++ can be unsafe because they are not atomic. I also learned that ReentrantLock is useful for protecting critical sections such as shared counters and shared lists. The assignment also showed me that Semaphore is useful when controlling access to a limited resource such as a CPU. Using try-finally is important because it guarantees that locks and semaphores are released even when an error happens. I also learned that correct multithreaded programs are not only about getting the right output once, but about producing safe and consistent behavior across repeated executions. This assignment connected the operating system concepts of processes, threads, scheduling, and synchronization in one practical program.
 [6-8 sentences about key concepts, challenges, insights]
 
 ---
@@ -321,13 +321,13 @@ I learned that synchronization must protect shared data even when the program ap
 Give TWO examples where synchronization is critical:
 
 **Example 1**: 
-
+Banking systems need synchronization when multiple transactions access the same account balance. Without synchronization, two withdrawals or deposits could happen at the same time and produce an incorrect final balance.
 **Example 2**: 
-
+Online ticket booking systems need synchronization when many users try to reserve the same seat. Without synchronization, the same seat could be sold to more than one customer.
 ---
 
 ### How I would explain synchronization to others:
-
+Synchronization is like allowing only one person at a time to write on a shared whiteboard. If many people write at the same time, the result may become incorrect or unreadable. In a program, shared variables are like that whiteboard. Locks make sure only one thread can update the shared data at a time. Semaphores are similar, but they control how many threads can access a resource based on the number of available permits. In this assignment, locks protected the shared counters and execution log, while the semaphore controlled access to the simulated CPU.
 [Explain to someone who just finished Assignment 1 - use simple terms and analogies]
 
 ---
