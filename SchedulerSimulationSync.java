@@ -50,33 +50,33 @@ class SharedResources {
     public static void incrementContextSwitch() {
         // TODO: Protect this critical section with a lock
         // RACE CONDITION: Multiple threads might read and write simultaneously!
-        lock.lock();
+        Lock.lock();
         try {
             contextSwitchCount++;
         } finally {
-            lock.unlock();
+            Lock.unlock();
         }
     }
 
     // Method to increment completed process counter
     public static void incrementCompletedProcess() {
         // TODO: Protect this critical section with a lock
-        lock.lock();
+        Lock.lock();
         try {
             contextSwitchCount++;
         } finally {
-            lock.unlock();
+            Lock.unlock();
         }
     }
 
     // Method to add waiting time
     public static void addWaitingTime(long time) {
         // TODO: Protect this critical section with a lock
-        lock.lock();
+        Lock.lock();
         try {
             totalWaitingTime += time;
         } finally {
-            lock.unlock();
+            Lock.unlock();
         }
     }
 
@@ -84,11 +84,11 @@ class SharedResources {
     public static void logExecution(String message) {
         // TODO: Protect this critical section with a lock
         // RACE CONDITION: ArrayList is not thread-safe!
-        lock.lock();
+        Lock.lock();
         try {
             executionLog.add(message);
         } finally {
-            lock.unlock();
+            Lock.unlock();
         }
     }
 }
@@ -118,10 +118,9 @@ class Process implements Runnable {
     public void run() {
         // TODO #3: Acquire CPU semaphore before executing
         // This ensures only allowed number of processes run simultaneously
-             try {
-            SharedResources.cpuSemaphore.acquire();
-        } catch (InterruptedException e)
         try {
+            SharedResources.cpuSemaphore.acquire();
+        } catch (InterruptedException e) {
             if (startTime == -1) {
                 startTime = System.currentTimeMillis();
             }
@@ -151,7 +150,7 @@ class Process implements Runnable {
                 }
                 System.out.println();
 
-            } catch (InterruptedException e) {
+            } catch (InterruptedException exception) {
                 System.out.println(Colors.RED + "\n  ✗ " + name + " was interrupted." + Colors.RESET);
             }
 
@@ -204,6 +203,8 @@ class Process implements Runnable {
     public void runToCompletion() {
         // TODO: Similar synchronization needed here
         try {
+            SharedResources.cpuSemaphore.acquire();
+
             System.out.println(Colors.BRIGHT_CYAN + "  ⚡ " + Colors.BOLD + Colors.CYAN + name +
                     Colors.RESET + Colors.BRIGHT_CYAN + " is the last process, running to completion" +
                     Colors.RESET + " [" + remainingTime + "ms]");
@@ -220,6 +221,8 @@ class Process implements Runnable {
             System.out.println();
         } catch (InterruptedException e) {
             System.out.println(Colors.RED + "  ✗ " + name + " was interrupted." + Colors.RESET);
+        } finally {
+            SharedResources.cpuSemaphore.release();
         }
     }
 
